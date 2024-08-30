@@ -1,3 +1,6 @@
+# Examples
+.examples/
+
 # Ignore chart dependencies
 /charts/*/charts
 **/charts/*.tgz
