@@ -72,8 +72,60 @@ Create the name of the service account to use
 */}}
 {{- define "microservice.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "microservice.fullname" .) .Values.serviceAccount.name }}
+  {{- default (include "microservice.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+  {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Define resource limits default
+*/}}
+{{- define "microservice.resources.limits.cpu" -}}
+{{- if .Values.resources }}
+  {{- if .Values.resources.limits }}
+    {{- default "200m" .Values.resources.limits.cpu }}
+  {{- else }}
+    {{- default "200m" }}
+  {{- end }}
+{{- else }}
+    {{- default "200m" }}
+{{- end }}
+{{- end }}
+
+{{- define "microservice.resources.limits.memory" -}}
+{{- if .Values.resources }}
+  {{- if .Values.resources.limits }}
+    {{- default "128Mi" .Values.resources.limits.memory }}
+  {{- else }}
+    {{- default "128Mi" }}
+  {{- end }}
+{{- else }}
+    {{- default "128Mi" }}
+{{- end }}
+{{- end }}
+
+{{- define "microservice.resources.requests.cpu" -}}
+{{- if .Values.resources }}
+  {{- if .Values.resources.requests }}
+    {{- default "100m" .Values.resources.requests.cpu }}
+  {{- else }}
+    {{- default "100m" }}
+  {{- end }}
+{{- else }}
+    {{- default "100m" }}
+{{- end }}
+{{- end }}
+
+{{- define "microservice.resources.requests.memory" -}}
+{{- if .Values.resources }}
+  {{- if .Values.resources.requests }}
+    {{- default "64Mi" .Values.resources.requests.memory }}
+  {{- else }}
+    {{- default "64Mi" }}
+  {{- end }}
+{{- else }}
+    {{- default "64Mi" }}
+{{- end }}
+{{- end }}
+

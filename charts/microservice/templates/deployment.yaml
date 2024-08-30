@@ -45,7 +45,12 @@ spec:
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            limits:
+              cpu: {{ include "microservice.resources.limits.cpu" . }}
+              memory: {{ include "microservice.resources.limits.memory" . }}
+            requests:
+              cpu: {{ include "microservice.resources.requests.cpu" . }}
+              memory: {{ include "microservice.resources.requests.memory" . }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
